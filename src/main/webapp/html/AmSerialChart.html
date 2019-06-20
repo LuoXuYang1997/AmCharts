@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条形图</title>
+    <link rel="stylesheet" href="../charts/style.css" type="text/css"/>
+    <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../charts/amcharts.js"></script>
+<script type="text/javascript" src="../charts/pie.js"></script>
+<script type="text/javascript" src="../charts/serial.js"></script>
+</head>
+<script>
+    //AmSerialChart.html
+    var chart;
+    var chartData ;
+    AmCharts.ready(function () {
+        $.getJSON("../room/getRoomNum",null,function(data){
+            console.log(data);
+            chart = new AmCharts.AmSerialChart();   //条形图
+            chart.dataProvider =data; //获取数据
+            chart.categoryField = "roomtypestr"; //横坐标
+            chart.fontSize = 12;  //标题大小
+            chart.startDuration = 1;//动画
+            chart.plotAreaBorderColor = "#DADADA"; //绘图区域边框颜色
+            chart.plotAreaBorderAlpha = 1; //绘图区域边框透明度
+
+            chart.rotate = true; //图像是否xy轴互换，默认为false，如果想让图像顺时针旋转90°，则设置为true
+
+            var categoryAxis = chart.categoryAxis; // categoryAxis（图表线，相当于X轴）
+            categoryAxis.gridPosition = "start";   //网格位置
+            categoryAxis.gridColor = "#000000"; //网格线颜色
+            categoryAxis.axisColor = "#000000";  //横坐标轴颜色
+            categoryAxis.gridAlpha = 0.1;//网格线透明度
+            categoryAxis.axisAlpha = 0; //坐标轴透明度
+
+            var valueAxis = new AmCharts.ValueAxis();//纵坐标轴
+            valueAxis.axisAlpha = 0;//坐标轴透明度
+            valueAxis.gridAlpha = 0.1;//网格线透明度
+            valueAxis.position = "top"; //轴的位置，默认在左侧
+            chart.addValueAxis(valueAxis);//添加Y轴。可以添加多个
+
+            var graph1 = new AmCharts.AmGraph();//图像对象，必须有该属性
+            graph1.type = "column"; //图像类型，有line、column、smoothedLine类型，第一种为线形图，第二种为柱状图
+            graph1.title = "房间数量";   //定义图形视图标题
+            graph1.valueField = "roomNum"; //指定一个字段作为Y坐标值
+            graph1.balloonText = "roomNum:[[value]]"; //节点显示的文本内容
+            graph1.lineAlpha = 0;
+            graph1.fillColors = "#ADD981";//填充区颜色
+            graph1.fillAlphas = 1; //填充区透明度，默认为0，最大值为1，当设置值时，在线条跟x轴之间的区域会填充颜色
+            chart.addGraph(graph1);//添加一个图形，可以添加多个，想要绘制图形，必须有此方法
+
+            var graph2 = new AmCharts.AmGraph();
+            graph2.type = "column";
+            graph2.title = "可入住房间数量";
+            graph2.valueField = "inRoomNum";
+            graph2.balloonText = "inRoomNum:[[value]]";
+            graph2.lineAlpha = 0;
+            graph2.fillColors = "#81acd9";
+            graph2.fillAlphas = 1;
+            chart.addGraph(graph2);
+
+            //创建legend对象，在图表的上方或者下方显示图例，图例的颜色就是对应线条的颜色
+            var legend = new AmCharts.AmLegend();
+            chart.addLegend(legend); //添加图例，可以添加多个
+            chart.creditsPosition = "top-right";
+            chart.write("chartdiv");  //将amcharts对象写到一个div中，最常用方法
+        });
+    });
+</script>
+<body>
+<div id="chartdiv"  style="height:600px;width:900px;float: left;"></div>
+</body>
+</html>
