@@ -26,7 +26,7 @@ public class Bill implements Serializable {
 
 
     //封装房间信息
-    private  Room room;
+    private Room room;
 
     public Room getRoom() {
         return room;
@@ -133,10 +133,10 @@ public class Bill implements Serializable {
     }
 
     public String getBillstatusstr() {
-        if (billstatus==0){
-            billstatusstr="结账";
-        }else if (billstatus==1){
-            billstatusstr="未结账";
+        if (billstatus == 0) {
+            billstatusstr = "结账";
+        } else if (billstatus == 1) {
+            billstatusstr = "未结账";
         }
         return billstatusstr;
     }
@@ -144,7 +144,6 @@ public class Bill implements Serializable {
     public void setBillstatusstr(String billstatusstr) {
         this.billstatusstr = billstatusstr;
     }
-
 
 
     @Override

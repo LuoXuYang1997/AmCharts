@@ -12,10 +12,7 @@ import java.util.List;
  **/
 public interface BillService {
 
-
-
     //根据房间类型，查询订单数量
     public List<Roomchartwithbill> getBillNumByRoomType();
-
 
 }

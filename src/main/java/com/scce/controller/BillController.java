@@ -21,15 +21,12 @@ public class BillController {
     @Autowired
     private BillService billService;
 
-
-
-//饼状图 房间类型订单数量图
+    //饼状图 房间类型订单数量图
     @RequestMapping("/getBillNumByRoomType")
     public List<Roomchartwithbill> getBillNumByRoomType() {
         System.out.println("进入getBillNumByRoomType");
         List<Roomchartwithbill> list = billService.getBillNumByRoomType();
         return list;
     }
-
 
 }

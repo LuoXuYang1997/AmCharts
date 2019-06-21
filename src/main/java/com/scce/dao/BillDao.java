@@ -14,5 +14,4 @@ public interface BillDao {
     @Select("select count(1) from bill where roomType=#{roomType}")
     public Integer getBillNumByRoomType(Integer roomtype);
 
-
 }

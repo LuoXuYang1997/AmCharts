@@ -28,9 +28,6 @@ public class BillServiceImpl implements BillService {
     @Autowired
     private RoomTypeDao roomTypeDao;
 
-
-
-
     @Override
     public List<Roomchartwithbill> getBillNumByRoomType() {
         List<Roomchartwithbill> list = new ArrayList<Roomchartwithbill>();
@@ -49,6 +46,5 @@ public class BillServiceImpl implements BillService {
         }
         return list;
     }
-
 
 }
