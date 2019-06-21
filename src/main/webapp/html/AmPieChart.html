@@ -5,46 +5,39 @@
     <title>饼状图</title>
     <link rel="stylesheet" href="../charts/style.css" type="text/css"/>
     <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="../charts/amcharts.js"></script>
-<script type="text/javascript" src="../charts/pie.js"></script>
-<script type="text/javascript" src="../charts/serial.js"></script>
+    <script type="text/javascript" src="../charts/amcharts.js"></script>
+    <script type="text/javascript" src="../charts/pie.js"></script>
+    <script type="text/javascript" src="../charts/serial.js"></script>
 </head>
 <script>
-        //AmPieChart.html
+    //AmPieChart.html
 
-     var chart1;
+    var chart1;
+    var chartData1;
+    AmCharts.ready(function () {
+        $.getJSON("../bill/getBillNumByRoomType", null, function (data) {
+            console.log(data);
 
-        var chartData1;
+            chart1 = new AmCharts.AmPieChart();  // 饼状图
 
-        AmCharts.ready(function () {
-            $.getJSON("../bill/getBillNumByRoomType",null,function(data){
-                console.log(data);
-
-            // PIE CHART
-            chart1 = new AmCharts.AmPieChart();
-
-            // title of the chart
-            chart1.addTitle("房间类型订单数量图", 16);
-            chart1.dataProvider = data;
-            chart1.titleField = "roomtype";
-            chart1.valueField = "billnumber";
-            chart1.sequencedAnimation = true;
-            chart1.startEffect = "elastic";
+            chart1.addTitle("房间类型订单数量图", 16);  // 添加标题
+            chart1.dataProvider = data; //指定数据来源，一般指向一个数组对象
+            chart1.titleField = "roomtype"; //饼状每一块的标题
+            chart1.valueField = "billnumber"; //饼状每一块的值
+            chart1.sequencedAnimation = true;  //指定动画应该被排序还是所有对象应该同时出现。
+            chart1.startEffect = "elastic";   //动画效果。可能的值是:easeoutsin, easeinsin, elastic, bounce
             chart1.innerRadius = "30%";
-            chart1.startDuration = 2;
+            chart1.startDuration = 2;  //Duration of the animation, in seconds.
             chart1.labelRadius = 15;
-            chart1.balloonText = "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>";
-            // the following two lines makes the chart 3D
-            chart1.depth3D = 10;
-            chart1.angle = 15;
-            // WRITE
+            chart1.balloonText = "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>";//节点显示的文本内容
+            chart1.depth3D = 10; //设置为3d图像的厚度值
+            chart1.angle = 15;  //角度，当设置图像为3d图时使用该属性，默认为0
             chart1.write("chartdiv");
-        });  });
+        });
+    });
 </script>
 
-
-
 <body>
-<div id="chartdiv"  style="height:600px;width:900px;float: left;"></div>
+<div id="chartdiv" style="height:600px;width:900px;float: left;"></div>
 </body>
 </html>
