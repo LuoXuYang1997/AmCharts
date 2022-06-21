@@ -36,7 +36,7 @@
     <!--jstl版本号-->
     <jstl.version>1.2</jstl.version>
     <!--mysql版本号-->
-    <mysql.version>5.1.6</mysql.version>
+    <mysql.version>8.0.28</mysql.version>
   </properties>
 
   <dependencies>
